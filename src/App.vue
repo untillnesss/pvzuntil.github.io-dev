@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <AppBar/>
+    <AppBar :drawer="drawer" />
+    <Banner id="Home" />
 
     <v-content>
       <router-view></router-view>
@@ -9,17 +10,17 @@
 </template>
 
 <script>
-import AppBar from  '@/components/AppBar.vue'
+import AppBar from "@/components/AppBar.vue";
+import Banner from "@/components/Banner.vue";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    AppBar
+    AppBar,
+    Banner
   },
 
-  data: () => ({
-    //
-  }),
+  data: () => ({})
 };
 </script>

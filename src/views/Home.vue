@@ -1,15 +1,19 @@
 <template>
-  <Banner/>
+  <v-container>
+    <About id="About" />
+    <Achive id="Achivement" />
+  </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
-
-import Banner from  '@/components/Banner.vue'
+import About from "@/components/About.vue";
+import Achive from "@/components/Achive.vue";
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    Banner
+    About,
+    Achive
   }
-}
+};
 </script>
