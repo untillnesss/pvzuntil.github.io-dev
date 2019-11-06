@@ -9,7 +9,10 @@
 
       <v-row align="center" justify="center" class="mt-5">
         <v-col cols="2" class="text-center col-12 col-sm-4 col-md-2">
-          <v-card @click="openInNew('https://github.com/pvzuntil')">
+          <v-card
+            @click="openInNew('https://wa.me/6281391472841')"
+            class="d-flex align-center justify-center"
+          >
             <v-card-text>
               <v-avatar>
                 <img src="@/assets/wa.png" />
@@ -46,6 +49,10 @@
 <script>
 export default {
   data: () => ({}),
-  methods: {}
+  methods: {
+    openInNew(x) {
+      window.open(x, "_blank");
+    }
+  }
 };
 </script>

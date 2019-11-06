@@ -36,6 +36,12 @@ export default {
         icon: "class"
       },
       {
+        color: "indigo",
+        year: "2017",
+        title: "Program Pengalaman Lapangan (PPL) di Mawar Foto Sarang",
+        icon: "school"
+      },
+      {
         color: "green",
         year: "1970",
         title: "Juara 1 Web Design LKS 2018 Kabupaten Rembang",
@@ -62,7 +68,7 @@ export default {
       {
         color: "green",
         year: "2000",
-        title: "5 Besar LKS Web Design 2019 Provinsi Jawa Tengah",
+        title: "Harapan 1 LKS Web Design 2019 Provinsi Jawa Tengah",
         icon: "emoji_events"
       }
     ]
