@@ -14,7 +14,14 @@
       <v-divider></v-divider>
 
       <v-list>
-        <v-list-item v-for="me in menu" :key="me" link>
+        <v-list-item
+          v-for="me in menu"
+          :key="me"
+          link
+          @click="$vuetify.goTo('#'+me.txt, {
+          offset: 50
+        }); drawer = !drawer"
+        >
           <v-list-item-icon>
             <v-icon>{{ me.icon }}</v-icon>
           </v-list-item-icon>
@@ -25,6 +32,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar app color="primary" dark inverted-scroll>
       <v-app-bar-nav-icon class="d-flex d-md-none" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Muhammad Abdullah Sa'id</v-toolbar-title>
@@ -65,8 +73,13 @@ export default {
       {
         txt: "Project",
         icon: "computer"
+      },
+      {
+        txt: "Contac",
+        icon: "phone"
       }
     ]
-  })
+  }),
+  methods: {}
 };
 </script>
