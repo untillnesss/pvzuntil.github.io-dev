@@ -54,6 +54,12 @@ export default {
         icon: "emoji_events"
       },
       {
+        color: "cyan",
+        year: "1970",
+        title: "BIMTEK LKS SMK Nasional - Jawa Tengah 2018",
+        icon: "class"
+      },
+      {
         color: "pink",
         year: "1980",
         title: "5 Besar IT Competition DINUS FEST 2019",
