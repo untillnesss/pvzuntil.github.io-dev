@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-// import goTo from "vuetify/es5/services/goto";
 
 Vue.use(VueRouter);
 

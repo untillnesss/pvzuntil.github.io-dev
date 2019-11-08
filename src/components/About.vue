@@ -4,7 +4,7 @@
       <v-col cols="12" sm="6">
         <v-img
           src="@/assets/me.jpg"
-          lazy-src="https://picsum.photos/id/11/10/6"
+          lazy-src="@/assets/me.jpg"
           aspect-ratio="1"
           class="grey lighten-2"
           max-width="500"
