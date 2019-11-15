@@ -1,0 +1,84 @@
+{
+  "navbar": {
+    "title": "Muhammad Abdullah Sa'id",
+    "menu": [
+      {
+        "txt": "Home",
+        "icon": "home"
+      },
+      {
+        "txt": "About",
+        "icon": "info"
+      },
+      {
+        "txt": "Achivement",
+        "icon": "emoji_events"
+      },
+      {
+        "txt": "Project",
+        "icon": "computer"
+      },
+      {
+        "txt": "Contac",
+        "icon": "phone"
+      }
+    ]
+  },
+  "banner": {
+    "name": "Muhammad Abdullah Sa'id",
+    "desc": "Insyaallah, Full Stack Web Developer :)"
+  },
+  "about": {
+    "desc": "Saya seorang developer dari Rembang - Jawa Tengah, dan saya memiliki bakat dalam mengembangkan aplikasi berbasis Website dan do'akan saja bisa merambat ke Mobile Application."
+  },
+  "achive": [
+    {
+      "color": "cyan",
+      "year": "2017",
+      "title": "Seminar IT Bussines STMIK Himsya",
+      "icon": "class"
+    },
+    {
+      "color": "indigo",
+      "year": "2017",
+      "title": "Program Pengalaman Lapangan (PPL) di Mawar Foto Sarang",
+      "icon": "school"
+    },
+    {
+      "color": "green",
+      "year": "1970",
+      "title": "Juara 1 Web Design LKS 2018 Kabupaten Rembang",
+      "icon": "emoji_events"
+    },
+    {
+      "color": "green",
+      "year": "1970",
+      "title": "Juara 2 Web Design LKS 2018 Provinsi Jawa Tengah",
+      "icon": "emoji_events"
+    },
+    {
+      "color": "cyan",
+      "year": "1970",
+      "title": "BIMTEK LKS SMK Nasional - Jawa Tengah 2018",
+      "icon": "class"
+    },
+    {
+      "color": "pink",
+      "year": "1980",
+      "title": "5 Besar IT Competition DINUS FEST 2019",
+      "icon": "person"
+    },
+    {
+      "color": "indigo",
+      "year": "1990",
+      "title": "Praktik Kerja Lapangan DINKOMINFO Rembang",
+      "icon": "school"
+    },
+    {
+      "color": "green",
+      "year": "2000",
+      "title": "Harapan 1 LKS Web Design 2019 Provinsi Jawa Tengah",
+      "icon": "emoji_events"
+    }
+  ]
+}

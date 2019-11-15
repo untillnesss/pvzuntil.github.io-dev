@@ -2,3 +2,5 @@ todo-final
 quickcount-dev
 snap-final
 w-512-final
+manatok
+lapuwang

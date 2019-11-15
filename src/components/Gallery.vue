@@ -1,5 +1,21 @@
+<style scoped>
+.lightbox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+}
+</style>
 <template>
   <div>
+    <div class="lightbox d-flex">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, esse?</p>
+    </div>
     <v-carousel
       height="600"
       hide-delimiter-background

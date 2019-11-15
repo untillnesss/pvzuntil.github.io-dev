@@ -54,31 +54,12 @@
 </template>
 
 <script>
+import db from "@/db.json";
+
 export default {
   data: () => ({
     drawer: false,
-    menu: [
-      {
-        txt: "Home",
-        icon: "home"
-      },
-      {
-        txt: "About",
-        icon: "info"
-      },
-      {
-        txt: "Achivement",
-        icon: "emoji_events"
-      },
-      {
-        txt: "Project",
-        icon: "computer"
-      },
-      {
-        txt: "Contac",
-        icon: "phone"
-      }
-    ]
+    menu: db.navbar.menu
   }),
   methods: {}
 };

@@ -14,9 +14,9 @@
           >
             <v-card :color="item.color" dark>
               <v-card-title class="title">{{item.title}}</v-card-title>
-              <v-card-text class="white text--primary pt-3 text-justify">
+              <!-- <v-card-text class="white text--primary pt-3 text-justify">
                 <p>Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</p>
-              </v-card-text>
+              </v-card-text>-->
             </v-card>
           </v-timeline-item>
         </v-timeline>
@@ -26,58 +26,10 @@
 </template>
 
 <script>
+import db from "@/db.json";
 export default {
   data: () => ({
-    items: [
-      {
-        color: "cyan",
-        year: "2017",
-        title: "Seminar IT Bussines STMIK Himsya",
-        icon: "class"
-      },
-      {
-        color: "indigo",
-        year: "2017",
-        title: "Program Pengalaman Lapangan (PPL) di Mawar Foto Sarang",
-        icon: "school"
-      },
-      {
-        color: "green",
-        year: "1970",
-        title: "Juara 1 Web Design LKS 2018 Kabupaten Rembang",
-        icon: "emoji_events"
-      },
-      {
-        color: "green",
-        year: "1970",
-        title: "Juara 2 Web Design LKS 2018 Provinsi Jawa Tengah",
-        icon: "emoji_events"
-      },
-      {
-        color: "cyan",
-        year: "1970",
-        title: "BIMTEK LKS SMK Nasional - Jawa Tengah 2018",
-        icon: "class"
-      },
-      {
-        color: "pink",
-        year: "1980",
-        title: "5 Besar IT Competition DINUS FEST 2019",
-        icon: "person"
-      },
-      {
-        color: "indigo",
-        year: "1990",
-        title: "Praktik Kerja Lapangan DINKOMINFO Rembang",
-        icon: "school"
-      },
-      {
-        color: "green",
-        year: "2000",
-        title: "Harapan 1 LKS Web Design 2019 Provinsi Jawa Tengah",
-        icon: "emoji_events"
-      }
-    ]
+    items: db.achive
   })
 };
 </script>

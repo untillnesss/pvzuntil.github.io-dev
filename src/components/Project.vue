@@ -11,26 +11,15 @@
         <v-card class="mx-auto" shaped>
           <v-img :src="pro.img" height="200px"></v-img>
 
-          <v-card-title>{{pro.title}} {{i}}</v-card-title>
+          <v-card-title>{{pro.title}}</v-card-title>
 
-          <v-card-subtitle>{{pro.date}}</v-card-subtitle>
+          <v-card-subtitle>
+            <v-chip :color="pro.status == 'dev' ? 'error' : 'primary'" small>{{upper(pro.status)}}</v-chip>
+          </v-card-subtitle>
 
           <v-card-actions>
-            <v-btn color="purple" text>Open</v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon @click="pro.show = !pro.show">
-              <v-icon>{{ pro.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-            </v-btn>
+            <v-btn color="primary" text>Open</v-btn>
           </v-card-actions>
-
-          <v-expand-transition>
-            <div v-show="pro.show">
-              <v-divider></v-divider>
-              <v-card-text>{{pro.desc}}</v-card-text>
-            </div>
-          </v-expand-transition>
         </v-card>
       </v-col>
     </v-row>
@@ -38,44 +27,54 @@
 </template>
 
 <script>
+// import snap from "@/assets/img/snap.png";
 export default {
+  computed: {},
+  methods: {
+    upper(a) {
+      return a.toUpperCase();
+    }
+  },
   data: () => ({
     show: false,
     project: [
       {
-        img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-        title: "Project 1",
-        date: "Januari, 10 2019",
-        show: false,
-        desc:
-          "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape."
+        img: require("@/assets/img/todo.png"),
+        title: "Todo List",
+        status: "final",
+        link: "https://pvzuntil.github.io/todo/"
+      },
+      {
+        // img: snap,
+        title: "Quickcount PILPRES",
+        status: "dev",
+        link: "https://pvzuntil.github.io/quickcount/"
+      },
+      {
+        img: "sa",
+        title: "thanoSnap",
+        status: "final",
+        link: "https://pvzuntil.github.io/snap/"
       },
       {
         img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-        title: "Project 1",
-        date: "Januari, 10 2019",
-        show: false,
-        desc:
-          "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape."
+        title: "W-512",
+        status: "final",
+        link: "https://pvzuntil.github.io/w-512/"
       },
       {
         img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-        title: "Project 1",
-        date: "Januari, 10 2019",
-        show: false,
-        desc:
-          "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape."
+        title: "Mana Tok",
+        status: "final",
+        link: "http://manajementokoonline.000webhostapp.com/"
       },
       {
         img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
-        title: "Project 1",
-        date: "Januari, 10 2019",
-        show: false,
-        desc:
-          "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape."
+        title: "Lap Uwang",
+        status: "dev",
+        link: "http://lapuwang.herokuapp.com/"
       }
     ]
-  }),
-  methods: {}
+  })
 };
 </script>
