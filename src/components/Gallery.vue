@@ -3,19 +3,35 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
-  z-index: 99999;
-  align-items: center;
-  justify-content: center;
+  z-index: 1000;
+  color: white;
+}
+
+.lightbox-img {
+  z-index: 1001 !important;
 }
 </style>
 <template>
   <div>
-    <div class="lightbox d-flex">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, esse?</p>
-    </div>
+    <transition
+      enter-active-class="animated fadeInDown faster"
+      leave-active-class="animated fadeOutDown faster"
+    >
+      <div v-if="show" class="lightbox d-flex justify-center align-center" @click="show = !show">
+        <v-card shaped color="transparent" flat>
+          <v-img :src="lightBoxImg" max-width="700" max-height="500" class="lightbox-img">
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </v-card>
+      </div>
+    </transition>
     <v-carousel
       height="600"
       hide-delimiter-background
@@ -54,7 +70,12 @@
                 >
                   <v-card flat tile class="d-flex">
                     <v-fade-transition>
-                      <v-img :src="n" aspect-ratio="1" class="grey lighten-2">
+                      <v-img
+                        :src="n"
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                        @click="showLightBox(n)"
+                      >
                         <template v-slot:placeholder>
                           <v-row class="fill-height ma-0" align="center" justify="center">
                             <v-progress-circular indeterminate color="primary"></v-progress-circular>
@@ -84,9 +105,16 @@ import pic7 from "@/assets/slideshow/7.jpeg";
 
 export default {
   components: {},
-  methods: {},
+  methods: {
+    showLightBox(img) {
+      this.lightBoxImg = img;
+      this.show = !this.show;
+    }
+  },
   data() {
     return {
+      lightBoxImg: null,
+      show: false,
       img: [pic1, pic2, pic3, pic4, pic5, pic6],
       slides: [
         {

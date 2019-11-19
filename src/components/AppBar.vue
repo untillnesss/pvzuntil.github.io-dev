@@ -1,18 +1,6 @@
 <template>
   <div>
     <v-navigation-drawer app v-model="drawer" floating fixed temporary>
-      <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>Muhammad Abdullah Sa'id</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-
       <v-list>
         <v-list-item
           v-for="me in menu"

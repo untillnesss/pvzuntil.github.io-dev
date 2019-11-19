@@ -10,7 +10,7 @@
       <v-col v-for="(pro, i) in project" :key="i" :class="'col-lg-4 col-md-6 col-sm-6 col-12'">
         <v-card class="mx-auto" shaped>
           <v-img :src="pro.img" height="200px"></v-img>
-
+          <v-divider></v-divider>
           <v-card-title>{{pro.title}}</v-card-title>
 
           <v-card-subtitle>
@@ -18,7 +18,8 @@
           </v-card-subtitle>
 
           <v-card-actions>
-            <v-btn color="primary" text>Open</v-btn>
+            <v-spacer />
+            <v-btn color="primary" text @click="openLink(pro.link)">Open</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -27,49 +28,51 @@
 </template>
 
 <script>
-// import snap from "@/assets/img/snap.png";
 export default {
   computed: {},
   methods: {
     upper(a) {
       return a.toUpperCase();
+    },
+    openLink(url) {
+      window.open(url, "_blank");
     }
   },
   data: () => ({
     show: false,
     project: [
       {
-        img: require("@/assets/img/todo.png"),
+        img: require("@/assets/img/todo.jpg"),
         title: "Todo List",
         status: "final",
         link: "https://pvzuntil.github.io/todo/"
       },
       {
-        // img: snap,
+        img: require("@/assets/img/qc.jpg"),
         title: "Quickcount PILPRES",
         status: "dev",
         link: "https://pvzuntil.github.io/quickcount/"
       },
       {
-        img: "sa",
+        img: require("@/assets/img/snap.jpg"),
         title: "thanoSnap",
         status: "final",
         link: "https://pvzuntil.github.io/snap/"
       },
       {
-        img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        img: require("@/assets/img/w512.jpg"),
         title: "W-512",
         status: "final",
         link: "https://pvzuntil.github.io/w-512/"
       },
       {
-        img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        img: require("@/assets/img/manatok.jpg"),
         title: "Mana Tok",
         status: "final",
         link: "http://manajementokoonline.000webhostapp.com/"
       },
       {
-        img: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+        img: require("@/assets/img/lapuwang.jpg"),
         title: "Lap Uwang",
         status: "dev",
         link: "http://lapuwang.herokuapp.com/"

@@ -217,7 +217,6 @@ export default {
       window.open(x, "_blank");
     },
     tawkClick() {
-      console.log(this.tawkEl);
       // this.tawkEl.click();
     }
   },
