@@ -1,5 +1,6 @@
 <template>
-<div></div></template>
+  <div></div>
+</template>
 
 <script>
 // @ is an alias to /src
