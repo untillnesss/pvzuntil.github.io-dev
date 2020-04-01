@@ -42,13 +42,28 @@
 </template>
 
 <script>
-import db from "@/db.json";
-
+// import db from "@/db.json";
+import firebase from "firebase";
 export default {
   data: () => ({
     drawer: false,
-    menu: db.navbar.menu
+    menu: []
   }),
-  methods: {}
+  methods: {},
+  created() {
+    firebase
+      .firestore()
+      .collection("menu")
+      .orderBy("createdAt", "asc")
+      .onSnapshot(snap => {
+        this.menu = [];
+        snap.forEach(snapp => {
+          this.menu.push({
+            txt: snapp.data().txt,
+            icon: snapp.data().icon
+          });
+        });
+      });
+  }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppBar :drawer="drawer" />
+    <AppBar />
     <Banner id="Home" />
 
     <v-content>

@@ -95,7 +95,7 @@ export default {
     };
   },
   created() {
-    this.ref.onSnapshot(snap => {
+    this.ref.orderBy("createdAt", "asc").onSnapshot(snap => {
       this.menus = [];
       snap.forEach(snapp => {
         this.menus.push({
@@ -104,7 +104,6 @@ export default {
           icon: snapp.data().icon
         });
       });
-      console.log(this.menus);
     });
   },
   methods: {
@@ -113,7 +112,8 @@ export default {
       this.ref
         .add({
           txt: this.nama,
-          icon: this.icon
+          icon: this.icon,
+          createdAt: new Date()
         })
         .then(() => {
           this.sheet = !this.sheet;
