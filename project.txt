@@ -4,3 +4,9 @@ snap-final
 w-512-final
 manatok
 lapuwang
+
+//
+hilih
+----
+QR app
+Corona app
