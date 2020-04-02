@@ -37,7 +37,7 @@
       hide-delimiter-background
       show-arrows-on-hover
       cycle
-      touch
+      :touch="{}"
       progress
       interval="5000"
     >

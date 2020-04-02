@@ -162,7 +162,7 @@ export default {
       this.btnloading = true;
       this.ref
         .doc(this.idForEdit)
-        .set({
+        .update({
           txt: this.nama,
           icon: this.icon
         })

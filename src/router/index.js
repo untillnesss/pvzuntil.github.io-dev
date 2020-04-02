@@ -47,7 +47,6 @@ router.beforeEach((to, from, next) => {
   } else {
     curr = firebase.auth().currentUser.email;
   }
-  console.log(curr);
   var reqLogin = to.meta.reqLogin;
   var reqName = to.name;
 

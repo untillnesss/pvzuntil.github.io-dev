@@ -26,6 +26,13 @@
 
       <Contac style="background: #2586e6; margin-top:-10px" class="p-0 m-0" id="Contac" />
     </v-content>
+    <v-speed-dial bottom right fixed direction="top" transition="slide-y">
+      <template v-slot:activator>
+        <v-btn color="blue darken-2" dark fab to="/login">
+          <v-icon>mdi-account-circle</v-icon>
+        </v-btn>
+      </template>
+    </v-speed-dial>
   </div>
 </template>
 <script>

@@ -3,8 +3,8 @@
     <v-navigation-drawer app v-model="drawer" floating fixed temporary>
       <v-list>
         <v-list-item
-          v-for="me in menu"
-          :key="me"
+          v-for="(me, index) in menu"
+          :key="index"
           link
           @click="$vuetify.goTo('#'+me.txt, {
           offset: 50
@@ -19,6 +19,11 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <!-- <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block>Admin</v-btn>
+        </div>
+      </template>-->
     </v-navigation-drawer>
 
     <v-app-bar app color="primary" dark inverted-scroll>
@@ -30,8 +35,8 @@
       <v-toolbar-items class="d-none d-md-flex">
         <v-btn
           text
-          v-for="me in menu"
-          :key="me"
+          v-for="(me, index) in menu"
+          :key="index"
           @click="$vuetify.goTo('#'+me.txt, {
           offset: 50
         })"

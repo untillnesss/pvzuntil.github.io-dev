@@ -1,10 +1,21 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-btn color="primary" @click="loginGoogle()">LOGIN GOOGLE</v-btn>
-    </v-row>
-    <v-row align="center" justify="center" v-if="!isGranted">
-      <p class="red--text">AKSES DITOLAK</p>
+      <v-col class="d-flex flex-column justify-center align-center">
+        <v-btn color="primary" @click="loginGoogle()">LOGIN GOOGLE</v-btn>
+        <div v-if="!isGranted" class="d-flex flex-column justify-center align-center">
+          <p class="mt-4 red--text">AKSES DITOLAK</p>
+          <div style="width: 150%">
+            <v-divider></v-divider>
+          </div>
+          <small class="mt-2">Hanya admin yang boleh masuk.</small>
+        </div>
+        <small class="mt-3">
+          <router-link to="/">
+            <a>Kembali !</a>
+          </router-link>
+        </small>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -24,7 +35,6 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(he => {
-          console.log(he.user.email);
           if (he.user.email != "pvzuntil@gmail.com") {
             this.isGranted = false;
           } else {
