@@ -21,19 +21,24 @@ var firebaseConfig = {
   projectId: "lesvue-a9fd6",
   storageBucket: "lesvue-a9fd6.appspot.com",
   messagingSenderId: "259290000174",
-  appId: "1:259290000174:web:cbe5e334489964f892a8bf"
+  appId: "1:259290000174:web:cbe5e334489964f892a8bf",
+  measurementId: "G-8532TZ1B9Q",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
       router,
       vuetify,
-      render: h => h(App)
+      render: (h) => h(App),
     }).$mount("#app");
   }
 });
 
-export const db = firebase.firestore();
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+export { db, storage };

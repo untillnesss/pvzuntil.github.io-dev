@@ -9,11 +9,10 @@
       transition="scale-transition"
     >
       <v-card>
-        <v-container>
-          <v-card-title primary-title>Site settings</v-card-title>
-          <v-divider></v-divider>
-          <v-card-text>
-            <!-- <v-container> -->
+        <v-card-title primary-title>Site settings</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-container class="pa-2">
             <v-row>
               <v-col cols="12" md="6">
                 <!-- <v-col> -->
@@ -56,23 +55,82 @@
                 </v-row>
               </v-col>
             </v-row>
-            <!-- </v-container> -->
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <v-btn color="error" @click="closeModal()">close</v-btn>
-          </v-card-actions>
-        </v-container>
+            <v-row>
+              <v-col cols="12" md="6">
+                <v-file-input
+                  v-model="siteHeader.files"
+                  label="File input"
+                  prepend-icon="camera_alt"
+                  outlined
+                  dense
+                  show-size
+                  counter
+                  accept="image/*"
+                  @change="getPreviewFile"
+                  :loading="siteHeader.loadingField"
+                >
+                  <template v-slot:selection="{ index, text }">
+                    <v-chip v-if="index < 2" color="blue" dark label x-small>{{ text }}</v-chip>
+
+                    <span
+                      v-else-if="index === 2"
+                      class="overline blue--text text--darken-3 mx-2"
+                    >+{{ files.length - 2 }} File(s)</span>
+                  </template>
+                </v-file-input>
+                <v-row>
+                  <v-spacer></v-spacer>
+                  <v-progress-circular
+                    :value="siteHeader.loadingValue"
+                    color="success"
+                    class="mr-3"
+                    v-if="siteHeader.isLoading"
+                  ></v-progress-circular>
+                  <v-btn
+                    v-else
+                    color="success"
+                    small
+                    class="mr-3"
+                    :disabled="this.siteHeader.disableBtn"
+                    :loading="this.siteHeader.loadingBtn"
+                    @click="uploadImage"
+                  >upload</v-btn>
+                </v-row>
+              </v-col>
+              <v-col cols="12" md="6">
+                <p>Preview Image</p>
+                <v-img
+                  :src="imagePrev.ori"
+                  :lazy-src="imagePrev.crop"
+                  aspect-ratio="1"
+                  class="grey lighten-2"
+                  height="250"
+                >
+                  <template v-slot:placeholder>
+                    <v-row class="fill-height ma-0" align="center" justify="center">
+                      <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn color="error" @click="closeModal()">close</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
 </template>
 
 <script>
-import { db } from "@/main.js";
+import { db, storage } from "@/main.js";
 export default {
   data: () => ({
     ref: db.collection("siteSetting"),
+    idDoc: "",
     siteName: {
       id: "",
       field: "",
@@ -84,8 +142,22 @@ export default {
       field: "",
       loadingField: false,
       loadingBtn: false
+    },
+    siteHeader: {
+      files: null,
+      disableBtn: true,
+      ref: storage,
+      loadingField: false,
+      loadingBtn: false,
+      isLoading: false,
+      loadingValue: 0
+    },
+    imagePrev: {
+      ori: "",
+      crop: ""
     }
   }),
+  computed: {},
   props: ["openDialog"],
   methods: {
     closeModal() {
@@ -96,7 +168,7 @@ export default {
       this.siteName.loadingField = true;
       this.siteName.loadingBtn = true;
       this.ref
-        .doc(this.siteName.id)
+        .doc(this.idDoc)
         .update({
           siteName: this.siteName.field
         })
@@ -117,7 +189,7 @@ export default {
       this.siteSlug.loadingField = true;
       this.siteSlug.loadingBtn = true;
       this.ref
-        .doc(this.siteSlug.id)
+        .doc(this.idDoc)
         .update({
           siteSlug: this.siteSlug.field
         })
@@ -133,17 +205,62 @@ export default {
             position: "top-right"
           });
         });
+    },
+    getPreviewFile() {
+      this.siteHeader.files == null
+        ? (this.siteHeader.disableBtn = true)
+        : (this.siteHeader.disableBtn = false);
+    },
+    uploadImage() {
+      var curDate = new Date();
+      var time = curDate.getTime();
+      var uploading = this.siteHeader.ref
+        .ref(time + "-" + this.siteHeader.files.name + "")
+        .put(this.siteHeader.files);
+
+      uploading.on(
+        "state_changed",
+        snap => {
+          this.siteHeader.isLoading = true;
+          this.siteHeader.loadingField = true;
+          this.siteHeader.loadingBtn = true;
+          this.siteHeader.loadingValue =
+            (snap.bytesTransferred / snap.totalBytes) * 100;
+        },
+        () => {},
+        () => {
+          this.siteHeader.loadingField = false;
+          this.siteHeader.disableBtn = true;
+          this.siteHeader.loadingBtn = false;
+          this.siteHeader.loadingValue = 0;
+          this.siteHeader.isLoading = false;
+          this.siteHeader.files = null;
+          uploading.snapshot.ref.getDownloadURL().then(url => {
+            var fileExt = uploading.snapshot.ref.name.split(".")[1];
+            var splitUrl = url.split("." + fileExt);
+            var cropUrl = splitUrl[0] + "_200x200." + fileExt + splitUrl[1];
+            this.imagePrev.ori = url;
+
+            this.ref.doc(this.idDoc).update({
+              siteHeader: {
+                ori: url,
+                crop: cropUrl
+              }
+            });
+          });
+        }
+      );
     }
   },
   created() {
     this.ref.onSnapshot(snap => {
       snap.forEach(snapp => {
-        console.log(snapp.data());
-        this.siteName.id = snapp.id;
-        this.siteName.field = snapp.data().siteName;
-
-        this.siteSlug.id = snapp.id;
-        this.siteSlug.field = snapp.data().siteSlug;
+        var data = snapp.data();
+        this.idDoc = snapp.id;
+        this.siteName.field = data.siteName;
+        this.siteSlug.field = data.siteSlug;
+        this.imagePrev.crop = data.siteHeader.crop;
+        this.imagePrev.ori = data.siteHeader.ori;
       });
     });
   }

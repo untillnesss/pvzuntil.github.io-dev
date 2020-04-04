@@ -44,7 +44,7 @@ import AdminSiteSetting from "@/components/admin/Admin.vue";
 export default {
   data() {
     return {
-      dialog: false,
+      dialog: true, // TODO UBAH KE False saat production
       tab: null,
       items: [
         {
