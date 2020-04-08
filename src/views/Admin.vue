@@ -25,10 +25,10 @@
 
     <v-tabs-items v-model="tab" class="transparent">
       <v-tab-item>
-        <AdminMenuBar></AdminMenuBar>
+        <AdminMenuBar />
       </v-tab-item>
       <v-tab-item>
-        <h1>HEHEHE</h1>
+        <AdminAbout />
       </v-tab-item>
     </v-tabs-items>
     <!-- </v-container> -->
@@ -41,11 +41,12 @@
 import firebase from "firebase";
 import AdminMenuBar from "@/components/admin/AdminMenuBar.vue";
 import AdminSiteSetting from "@/components/admin/Admin.vue";
+import AdminAbout from "@/components/admin/About.vue";
 export default {
   data() {
     return {
-      dialog: true, // TODO UBAH KE False saat production
-      tab: null,
+      dialog: false, // TODO UBAH KE False saat production
+      tab: 1, // TODO UBAH KE 0 saat production
       items: [
         {
           name: "menu bar"
@@ -69,7 +70,8 @@ export default {
   },
   components: {
     AdminMenuBar,
-    AdminSiteSetting
+    AdminSiteSetting,
+    AdminAbout
   }
 };
 </script>

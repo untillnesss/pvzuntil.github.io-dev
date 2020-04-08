@@ -13,31 +13,31 @@ const routes = [
     name: "home",
     component: Home,
     meta: {
-      reqLogin: false
-    }
+      reqLogin: false,
+    },
   },
   {
     path: "/login",
     name: "login",
     component: Login,
     meta: {
-      reqLogin: false
-    }
+      reqLogin: false,
+    },
   },
   {
     path: "/admin",
     name: "admin",
     component: Admin,
     meta: {
-      reqLogin: true
-    }
-  }
+      reqLogin: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
@@ -59,6 +59,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+  window.akanMengakses = to.name;
 });
 
 export default router;

@@ -1,6 +1,6 @@
 <template>
   <!-- <v-parallax dark src="@/assets/banner2_crop.jpg" height="800"> -->
-  <v-parallax dark :src="inf.siteHeader.ori" height="800">
+  <v-parallax dark :src="imgBanner" height="800">
     <v-row align="start" justify="center">
       <v-col class="text-center" cols="12" style="margin-top: 230px">
         <v-fade-transition :key="inf.siteName">
@@ -20,12 +20,14 @@ import { db } from "@/main.js";
 export default {
   data: () => ({
     inf: "",
-    ref: db.collection("siteSetting")
+    ref: db.collection("siteSetting"),
+    imgBanner: ""
   }),
   created() {
     this.ref.onSnapshot(snap => {
       snap.forEach(snapp => {
         this.inf = snapp.data();
+        this.imgBanner = snapp.data().siteHeader.ori;
       });
     });
   }

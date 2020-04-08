@@ -75,7 +75,7 @@
                     <span
                       v-else-if="index === 2"
                       class="overline blue--text text--darken-3 mx-2"
-                    >+{{ files.length - 2 }} File(s)</span>
+                    >+{{ siteHeader.files.length - 2 }} File(s)</span>
                   </template>
                 </v-file-input>
                 <v-row>
@@ -96,6 +96,12 @@
                     @click="uploadImage"
                   >upload</v-btn>
                 </v-row>
+                <v-switch
+                  v-model="isMaintenance"
+                  label="Mode Perbaikan"
+                  color="blue"
+                  @change="setMaintenance"
+                ></v-switch>
               </v-col>
               <v-col cols="12" md="6">
                 <p>Preview Image</p>
@@ -155,7 +161,8 @@ export default {
     imagePrev: {
       ori: "",
       crop: ""
-    }
+    },
+    isMaintenance: true
   }),
   computed: {},
   props: ["openDialog"],
@@ -250,6 +257,11 @@ export default {
           });
         }
       );
+    },
+    setMaintenance() {
+      this.ref.doc(this.idDoc).update({
+        isMaintenance: this.isMaintenance
+      });
     }
   },
   created() {
@@ -261,6 +273,7 @@ export default {
         this.siteSlug.field = data.siteSlug;
         this.imagePrev.crop = data.siteHeader.crop;
         this.imagePrev.ori = data.siteHeader.ori;
+        this.isMaintenance = data.isMaintenance;
       });
     });
   }

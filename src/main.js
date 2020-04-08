@@ -11,7 +11,7 @@ Vue.use(VueSweetalert2);
 
 let app;
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
