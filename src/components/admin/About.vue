@@ -5,7 +5,13 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-card elevation="1">
-            <v-img src="@/assets/me.jpg" height="300" aspect-ratio="1.4" contain></v-img>
+            <v-img
+              :src="fieldImage.ori"
+              :lazy-src="fieldImage.crop"
+              height="300"
+              aspect-ratio="1.4"
+              contain
+            ></v-img>
           </v-card>
           <v-file-input
             class="mt-4"
@@ -59,16 +65,19 @@
 </template>
 
 <script>
-import { storage } from "@/main.js";
+import { db, storage } from "@/main.js";
 export default {
   data: () => ({
-    aboutImage: "",
+    idDoc: "",
+    ref: db.collection("about"),
     fieldImage: {
       image: null,
       loading: false,
       disable: true,
       isLoading: false,
-      loadingValue: 0
+      loadingValue: 0,
+      ori: "",
+      crop: ""
     }
   }),
   methods: {
@@ -85,15 +94,47 @@ export default {
         .ref("" + time + "-" + this.fieldImage.image.name)
         .put(this.fieldImage.image);
 
-      uploading.on("state_changed", snap => {
-        this.fieldImage.loading = true;
-        this.fieldImage.isLoading = true;
-        this.fieldImage.loadingValue =
-          (snap.bytesTransferred / snap.totalBytes) * 100;
-      });
+      uploading.on(
+        "state_changed",
+        snap => {
+          this.fieldImage.loading = true;
+          this.fieldImage.isLoading = true;
+          this.fieldImage.loadingValue =
+            (snap.bytesTransferred / snap.totalBytes) * 100;
+        },
+        () => {},
+        () => {
+          this.fieldImage.image = null;
+          this.fieldImage.loading = false;
+          this.fieldImage.disable = true;
+          this.fieldImage.isLoading = false;
+          this.fieldImage.loadingValue = 0;
+          uploading.snapshot.ref.getDownloadURL().then(url => {
+            var fileExt = uploading.snapshot.ref.name.split(".")[1];
+            var splitUrl = url.split("." + fileExt);
+            var cropUrl = splitUrl[0] + "_200x200." + fileExt + splitUrl[1];
+            this.fieldImage.ori = url;
+            this.fieldImage.crop = cropUrl;
 
-      // console.log(uploading); TODO LANJUT sini
+            this.ref.doc(this.idDoc).update({
+              image: {
+                ori: url,
+                crop: cropUrl
+              }
+            });
+          });
+        }
+      );
     }
+  },
+  created() {
+    this.ref.onSnapshot(snap => {
+      snap.forEach(snapp => {
+        this.idDoc = snapp.id;
+        this.fieldImage.ori = snapp.data().image.ori;
+        this.fieldImage.crop = snapp.data().image.crop;
+      });
+    });
   }
 };
 </script>
