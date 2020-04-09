@@ -36,7 +36,7 @@
       <v-bottom-sheet v-model="sheet" inset>
         <v-sheet class="text-center">
           <v-container fluid px-6>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form" lazy-validation>
               <v-row>
                 <v-col>
                   <v-text-field v-model="nama" label="Nama menu" required></v-text-field>

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <v-navigation-drawer v-model="drawer" app clipped></v-navigation-drawer> -->
-    <!-- <v-container app clipped-left> -->
     <v-toolbar color="cyan" dark flat>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -31,9 +29,8 @@
         <AdminAbout />
       </v-tab-item>
     </v-tabs-items>
-    <!-- </v-container> -->
 
-    <AdminSiteSetting :open-dialog="dialog"></AdminSiteSetting>
+    <AdminSiteSetting :open-dialog="dialog" @update-dialog="closeDialog"></AdminSiteSetting>
   </div>
 </template>
 
@@ -66,6 +63,9 @@ export default {
         .then(() => {
           this.$router.replace("/login");
         });
+    },
+    closeDialog(newnew) {
+      this.dialog = newnew;
     }
   },
   components: {

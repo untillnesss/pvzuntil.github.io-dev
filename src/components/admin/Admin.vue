@@ -168,8 +168,7 @@ export default {
   props: ["openDialog"],
   methods: {
     closeModal() {
-      this.openDialog = !this.openDialog;
-      this.$parent.dialog = false;
+      this.$emit("update-dialog", !this.openDialog);
     },
     saveSiteName() {
       this.siteName.loadingField = true;
